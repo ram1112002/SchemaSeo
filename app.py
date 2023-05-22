@@ -24,7 +24,7 @@ webflow_oauth = oauth.remote_app(
 def callback(resp):
     access_token = resp['access_token']
     session['access_token'] = access_token
-    return redirect(url_for('profile'))
+    return redirect(url_for('/'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,7 +32,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        return redirect(url_for('profile'))
+        return redirect(url_for('/'))
     else:
         return render_template('login.html')
 
@@ -45,7 +45,7 @@ def signup():
     else:
         return render_template('signup.html')
 
-@app.route('/profile')
+@app.route('/')
 def profile():
     access_token = session.get('access_token')
     if access_token:
